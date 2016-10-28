@@ -9,7 +9,6 @@ import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import com.perceivedev.killcoinz.events.EntityListener;
-import com.perceivedev.perceivecore.command.CommandTree;
 import com.perceivedev.perceivecore.language.I18N;
 
 public class KillCoinz extends JavaPlugin {
@@ -26,9 +25,7 @@ public class KillCoinz extends JavaPlugin {
         instance = this;
 
         setupLanguage();
-
-        setupCommands();
-
+        
         playerManager = new PlayerManager(this);
         mobRegistry = new MobRegistry(this);
 

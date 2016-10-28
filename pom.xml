@@ -5,7 +5,7 @@
 	<artifactId>killcoinz</artifactId>
 	<version>1.0</version>
 	<name>KillCoinz</name>
-	<description>Some plugin description</description>
+	<description>A custom rewards system for killing mobs!</description>
 	<repositories>
 		<repository>
 			<id>spigot-repo</id>
