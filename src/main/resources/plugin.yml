@@ -1,0 +1,11 @@
+main: com.perceivedev.killcoinz.KillCoinz
+name: KillCoinz
+version: 1.0
+description: A custom rewards system for killing mobs!
+author: [Rayzr]
+commands:
+    killcoinz:
+        description: KillCoinz main command
+        aliases: [kc,coinz]
+        usage: "Oops! Something went wrong!"
+        permission: KillCoinz.user
