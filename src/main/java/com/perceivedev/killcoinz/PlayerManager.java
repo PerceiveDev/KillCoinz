@@ -34,10 +34,16 @@ public class PlayerManager {
      */
     public void load() {
         players.clear();
-        
+
         YamlConfiguration config = plugin.getConfig("players.yml");
-        config.getKeys(false).stream().filter(key -> config.isConfigurationSection(key)).map(key -> SerializationManager.deserialize(PlayerData.class, config.getConfigurationSection(key)))
-                .filter(data -> data != null).forEach(data -> players.add(data));
+        config.getKeys(false).stream().filter(key -> config.isConfigurationSection(key)).map(key -> {
+            return SerializationManager.deserialize(PlayerData.class, config.getConfigurationSection(key));
+        }).filter(data -> {
+            System.out.println("Filtering data: " + data);
+            return data != null;
+        }).forEach(data -> players.add(data));
+
+        System.out.println("Players.size() = " + players.size());
     }
 
     /**

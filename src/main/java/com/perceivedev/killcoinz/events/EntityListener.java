@@ -12,6 +12,7 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDeathEvent;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.util.Vector;
 
 import com.perceivedev.killcoinz.KillCoinz;
@@ -57,14 +58,20 @@ public class EntityListener implements Listener {
 
         Item item = e.getEntity().getWorld().dropItem(e.getEntity().getLocation().add(0, 0.5, 0), new ItemStack(Material.GOLD_NUGGET, 0));
         item.setCustomName(ChatColor.YELLOW + "KillCoinz: " + ChatColor.GOLD + value);
-        item.setTicksLived(5960);
         item.setInvulnerable(true);
-        item.setVelocity(new Vector(0, 0.2, 0));
+        item.setVelocity(new Vector(0, 0.4, 0));
         item.setCustomNameVisible(true);
 
         if (USE_GLOW) {
             item.setGlowing(true);
         }
+
+        new BukkitRunnable() {
+            @Override
+            public void run() {
+                item.remove();
+            }
+        }.runTaskLater(plugin, 15L);
 
         data.addCoins(value);
     }
