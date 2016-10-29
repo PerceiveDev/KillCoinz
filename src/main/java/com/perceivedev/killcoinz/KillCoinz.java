@@ -7,6 +7,7 @@ import java.nio.file.Path;
 
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.plugin.java.JavaPlugin;
+import org.bukkit.scheduler.BukkitRunnable;
 
 import com.perceivedev.killcoinz.events.EntityListener;
 import com.perceivedev.perceivecore.language.I18N;
@@ -25,11 +26,18 @@ public class KillCoinz extends JavaPlugin {
         instance = this;
 
         setupLanguage();
-        
+
         playerManager = new PlayerManager(this);
         mobRegistry = new MobRegistry(this);
 
         load();
+
+        new BukkitRunnable() {
+            @Override
+            public void run() {
+                save();
+            }
+        }.runTaskTimer(this, 120 * 20, 120 * 20);
 
         getServer().getPluginManager().registerEvents(new EntityListener(this), this);
     }
@@ -37,7 +45,6 @@ public class KillCoinz extends JavaPlugin {
     @Override
     public void onDisable() {
         playerManager.save();
-        mobRegistry.save();
 
         instance = null;
     }
@@ -66,6 +73,19 @@ public class KillCoinz extends JavaPlugin {
 
         playerManager.load();
         mobRegistry.load();
+    }
+
+    public void save() {
+        playerManager.save();
+        mobRegistry.save();
+    }
+
+    /**
+     * 
+     */
+    public void reload() {
+        playerManager.save();
+        load();
     }
 
     public String versionText() {
