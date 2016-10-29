@@ -5,6 +5,7 @@ package com.perceivedev.killcoinz;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.UUID;
 
 import org.bukkit.configuration.file.YamlConfiguration;
@@ -36,14 +37,10 @@ public class PlayerManager {
         players.clear();
 
         YamlConfiguration config = plugin.getConfig("players.yml");
-        config.getKeys(false).stream().filter(key -> config.isConfigurationSection(key)).map(key -> {
-            return SerializationManager.deserialize(PlayerData.class, config.getConfigurationSection(key));
-        }).filter(data -> {
-            System.out.println("Filtering data: " + data);
-            return data != null;
-        }).forEach(data -> players.add(data));
 
-        System.out.println("Players.size() = " + players.size());
+        config.getKeys(false).stream().filter(key -> config.isConfigurationSection(key)).map(key -> SerializationManager.deserialize(PlayerData.class, config.getConfigurationSection(key)))
+                .filter(Objects::nonNull).forEach(data -> players.add(data));
+
     }
 
     /**

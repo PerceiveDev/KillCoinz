@@ -16,6 +16,10 @@ public class PlayerData implements ConfigSerializable {
     private UUID id;
     private long coins = 0;
 
+    PlayerData() {
+        // Used by ConfigSerializable
+    }
+
     public PlayerData(UUID id) {
         this.id = id;
     }
