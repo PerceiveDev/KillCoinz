@@ -7,46 +7,49 @@ import org.bukkit.Material;
 import org.bukkit.entity.EntityType;
 
 import com.perceivedev.killcoinz.KillCoinz;
-import com.perceivedev.perceivecore.gui.DisplayType;
-import com.perceivedev.perceivecore.gui.GUI;
-import com.perceivedev.perceivecore.gui.component.Button;
+import com.perceivedev.perceivecore.gui.Gui;
+import com.perceivedev.perceivecore.gui.components.implementation.component.Button;
+import com.perceivedev.perceivecore.gui.components.implementation.component.simple.DisplayType;
+import com.perceivedev.perceivecore.gui.components.implementation.component.simple.SimpleButton;
+import com.perceivedev.perceivecore.gui.components.implementation.pane.FlowPane;
+import com.perceivedev.perceivecore.util.ItemFactory;
 
 /**
  * @author Rayzr
  *
  */
-public class ConfigGui extends GUI {
+public class ConfigGui extends Gui {
 
     private KillCoinz plugin;
 
     public ConfigGui(KillCoinz plugin) {
-        super(plugin.tr("gui.config.name"), 6);
+        super(plugin.tr("gui.config.name"), 6, new FlowPane(9, 6));
         this.plugin = plugin;
 
         init();
     }
 
     private void init() {
-        Button reload = new Button("&c&nReload Config", e -> {
+        SimpleButton reload = new SimpleButton("&c&nReload Config", e -> {
             plugin.reload();
             e.getPlayer().sendMessage(plugin.tr("config.reloaded"));
         });
-        reload.setDisplayType(DisplayType.custom(Material.REDSTONE_BLOCK, 0, 1));
-        addComponent(reload, 0, 5);
+        reload.setDisplayType(c -> ItemFactory.builder(Material.REDSTONE_BLOCK));
+        addComponent(reload);
 
-        Button save = new Button("&c&nSave Config", e -> {
+        SimpleButton save = new SimpleButton("&c&nSave Config", e -> {
             plugin.save();
             e.getPlayer().sendMessage(plugin.tr("config.saved"));
         });
-        save.setDisplayType(DisplayType.custom(Material.REDSTONE_BLOCK, 0, 1));
-        addComponent(save, 1, 5);
+        save.setDisplayType(c -> ItemFactory.builder(Material.REDSTONE_BLOCK));
+        addComponent(save);
 
         int i = 0;
         for (EntityType type : EntityType.values()) {
-            Button entityButton = new Button("&a&l" + type.getName(), e -> {
+            SimpleButton entityButton = new SimpleButton("&a&l" + type.getName(), e -> {
                 new EntityGui(plugin, type).open(e.getPlayer());
             });
-            addComponent(entityButton, i % 9, i / 9);
+            addComponent(entityButton);
             i++;
         }
 

@@ -5,11 +5,17 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 
+import org.bukkit.command.CommandExecutor;
+import org.bukkit.command.TabCompleter;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.scheduler.BukkitRunnable;
 
+import com.perceivedev.killcoinz.command.CommandKillCoinz;
 import com.perceivedev.killcoinz.events.EntityListener;
+import com.perceivedev.perceivecore.command.CommandTree;
+import com.perceivedev.perceivecore.command.DefaultCommandExecutor;
+import com.perceivedev.perceivecore.command.DefaultTabCompleter;
 import com.perceivedev.perceivecore.language.I18N;
 
 public class KillCoinz extends JavaPlugin {
@@ -39,7 +45,10 @@ public class KillCoinz extends JavaPlugin {
             }
         }.runTaskTimer(this, 120 * 20, 120 * 20);
 
+        setupCommands();
+
         getServer().getPluginManager().registerEvents(new EntityListener(this), this);
+
     }
 
     @Override
@@ -63,6 +72,20 @@ public class KillCoinz extends JavaPlugin {
         I18N.copyDefaultFiles("language", output, false, getFile());
 
         language = new I18N(this, "language");
+    }
+
+    private void setupCommands() {
+
+        CommandTree tree = new CommandTree();
+        CommandExecutor executor = new DefaultCommandExecutor(tree, language);
+        TabCompleter tabCompleter = new DefaultTabCompleter(tree);
+
+        CommandKillCoinz command = new CommandKillCoinz(this);
+
+        tree.addTopLevelChildAndRegister(command, executor, tabCompleter, this, "coinz", "kc", "kcoins");
+
+        tree.attachHelp(command, "KillCoinz.help", language);
+
     }
 
     public void load() {
