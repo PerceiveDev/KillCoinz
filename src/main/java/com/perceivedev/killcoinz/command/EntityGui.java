@@ -33,4 +33,18 @@ public class EntityGui extends Gui {
     private void init() {
     }
 
+    /**
+     * @return the plugin
+     */
+    public KillCoinz getPlugin() {
+        return plugin;
+    }
+
+    /**
+     * @return the type
+     */
+    public EntityType getType() {
+        return type;
+    }
+
 }

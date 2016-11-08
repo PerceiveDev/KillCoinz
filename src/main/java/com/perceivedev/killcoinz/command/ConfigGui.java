@@ -8,8 +8,6 @@ import org.bukkit.entity.EntityType;
 
 import com.perceivedev.killcoinz.KillCoinz;
 import com.perceivedev.perceivecore.gui.Gui;
-import com.perceivedev.perceivecore.gui.components.implementation.component.Button;
-import com.perceivedev.perceivecore.gui.components.implementation.component.simple.DisplayType;
 import com.perceivedev.perceivecore.gui.components.implementation.component.simple.SimpleButton;
 import com.perceivedev.perceivecore.gui.components.implementation.pane.FlowPane;
 import com.perceivedev.perceivecore.util.ItemFactory;
@@ -44,13 +42,11 @@ public class ConfigGui extends Gui {
         save.setDisplayType(c -> ItemFactory.builder(Material.REDSTONE_BLOCK));
         addComponent(save);
 
-        int i = 0;
         for (EntityType type : EntityType.values()) {
             SimpleButton entityButton = new SimpleButton("&a&l" + type.getName(), e -> {
                 new EntityGui(plugin, type).open(e.getPlayer());
             });
             addComponent(entityButton);
-            i++;
         }
 
     }

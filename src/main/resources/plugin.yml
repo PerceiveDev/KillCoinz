@@ -2,7 +2,8 @@ main: com.perceivedev.killcoinz.KillCoinz
 name: KillCoinz
 version: 1.0
 description: A custom rewards system for killing mobs!
-author: [Rayzr]
+authors: [Rayzr,I Al Istannen]
+depend: [PerceiveCore]
 commands:
     killcoinz:
         description: KillCoinz main command
