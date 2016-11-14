@@ -8,8 +8,8 @@ import org.bukkit.entity.EntityType;
 
 import com.perceivedev.killcoinz.KillCoinz;
 import com.perceivedev.perceivecore.gui.Gui;
-import com.perceivedev.perceivecore.gui.components.implementation.component.simple.SimpleButton;
-import com.perceivedev.perceivecore.gui.components.implementation.pane.FlowPane;
+import com.perceivedev.perceivecore.gui.components.panes.FlowPane;
+import com.perceivedev.perceivecore.gui.components.simple.SimpleButton;
 import com.perceivedev.perceivecore.util.ItemFactory;
 
 /**

@@ -7,7 +7,7 @@ import org.bukkit.entity.EntityType;
 
 import com.perceivedev.killcoinz.KillCoinz;
 import com.perceivedev.perceivecore.gui.Gui;
-import com.perceivedev.perceivecore.gui.components.implementation.pane.FlowPane;
+import com.perceivedev.perceivecore.gui.components.panes.FlowPane;
 
 /**
  * @author Rayzr
