@@ -8,6 +8,7 @@ import org.bukkit.entity.EntityType;
 
 import com.perceivedev.killcoinz.KillCoinz;
 import com.perceivedev.perceivecore.gui.Gui;
+import com.perceivedev.perceivecore.gui.base.Component;
 import com.perceivedev.perceivecore.gui.components.panes.FlowPane;
 import com.perceivedev.perceivecore.gui.components.simple.SimpleButton;
 import com.perceivedev.perceivecore.util.ItemFactory;
@@ -49,6 +50,10 @@ public class ConfigGui extends Gui {
             addComponent(entityButton);
         }
 
+    }
+
+    private void addComponent(Component component) {
+        getRootAsFreeform().addComponent(component);
     }
 
 }
